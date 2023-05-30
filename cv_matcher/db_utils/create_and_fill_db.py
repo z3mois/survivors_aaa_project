@@ -1,8 +1,9 @@
 import sqlite3
 import sys
-
+import os
 import pandas as pd
-sys.path.append('.\\data')
+sys.path.append('data')
+print(os.path.abspath(os.curdir))
 print(sys.path)
 from constants import PATH_TO_DF, DB_PATH, TABLE_NAME, COLUMNS_TO_INSERT
 

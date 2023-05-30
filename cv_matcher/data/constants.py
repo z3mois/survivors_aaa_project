@@ -13,13 +13,14 @@ MODEL_PARAMETERS = {
 }
 
 # указываем имя базы данных
-DB_PATH = '.\\data\\cv2vac_project_db'
+DB_PATH = 'data/cv2vac_project_db'
 
 # указываем имя таблицы в базе данных
 TABLE_NAME = 'avito_cv2vac'
 
 # путь к исходному датафрейму
-PATH_TO_DF = '.\\data\\avito_cv2vac_with_ranks_clear.pq'
+PATH_TO_DF = 'data/avito_cv2vac_with_ranks_clear.pq'
+
 
 # можно залить только часть
 COLUMNS_TO_INSERT = []

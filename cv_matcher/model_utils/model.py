@@ -1,5 +1,5 @@
 import sys
-sys.path.append('.\\data')
+sys.path.append('data')
 import torch
 from torch import nn
 from constants import MODEL_PARAMETERS

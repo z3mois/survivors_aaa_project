@@ -6,8 +6,8 @@ import torch
 from natasha import Segmenter, Doc
 from torch import nn
 from tqdm import tqdm
-sys.path.append('.\\data')
-sys.path.append('.\\db_utils')
+sys.path.append('data')
+sys.path.append('db_utils')
 from constants import DB_PATH, TABLE_NAME
 from read_vacs_by_city import read_column_by_city
 from model import create_model
@@ -19,10 +19,10 @@ def load_vocabs():
     Очень тупая функция, но я устал
     :return:
     '''
-    with open('.\\data\\res_vocab.pickle', 'rb') as f:
+    with open('data/res_vocab.pickle', 'rb') as f:
         res_vocab = pickle.load(f)
 
-    with open('.\\data\\vac_vocab.pickle', 'rb') as f:
+    with open('data/vac_vocab.pickle', 'rb') as f:
         vac_vocab = pickle.load(f)
 
     return vac_vocab, res_vocab
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     vac_vocab, res_vocab = load_vocabs()
 
     model = create_model()
-    final_state = torch.load('.\\data\\final_model_state.pth', map_location='cuda')
+    final_state = torch.load('data/final_model_state.pth', map_location='cuda')
     model.load_state_dict(final_state)
 
     # это пример

@@ -32,7 +32,7 @@ def main():
     st.set_page_config(page_title="Поиск кандидатов", page_icon=":guardsman:", layout="wide")
     vac_vocab, res_vocab = load_vocabs()
     model = create_model()
-    final_state = torch.load('data\\final_model_state.pth', map_location='cuda')
+    final_state = torch.load('data/final_model_state.pth', map_location='cpu')
     model.load_state_dict(final_state)
 
     # Create a sidebar with a title and description
@@ -42,7 +42,7 @@ def main():
     # Create a text input for the vacancy text
     description = st.text_area("Введите описание вакансии:")
     city = st.text_input("Введите город работы")
-    top_k = st.text_input("Введите количество резюме, которое хотите увидеть")
+    top_k = st.text_input("Введите количество резюме, которое хотите увидеть",value="10")
     # Create a button text_input trigger the similarity calculation
     if st.button('Подобрать кандидата'):
 
@@ -50,7 +50,7 @@ def main():
         with st.spinner('Cчитаем похожесть...'):
             data = None
             if not top_k:
-                result = model_inference_one_vac(model, vac_vocab, res_vocab, description, city, 'cuda')
+                result = model_inference_one_vac(model, vac_vocab, res_vocab, description, city, 'cpu')
                 data = pd.DataFrame(result, columns=["Описание резюме", "Похожесть"])
                 data = data.drop('Похожесть', axis=1)
                 data["Телефон"] = get_number(len(data))
@@ -58,15 +58,14 @@ def main():
                 try:
                     top_k = int(top_k)
                     if top_k <= 0:
-                        st.error(f"Произошла ошибка: Введите корректное число вакансий1")
+                        st.error(f"Произошла ошибка: Введите корректное число вакансий")
                     else:
-                        result = model_inference_one_vac(model, vac_vocab, res_vocab, description, city, 'cuda')
+                        result = model_inference_one_vac(model, vac_vocab, res_vocab, description, city, 'cpu')
                         data = pd.DataFrame(result, columns=["Описание резюме", "Похожесть"]).iloc[0:top_k]
                         data = data.drop('Похожесть', axis=1)
-                        print(len(get_number(len(data))))
                         data["Телефон"] = get_number(len(data))
-                except:
-                    st.error(f"Произошла ошибка: Введите корректное число вакансий2")
+                except Exception as e:
+                    st.error(f"Произошла ошибка: Введите корректное число вакансий")
             
             if not data  is None:
                 st.table(data)
