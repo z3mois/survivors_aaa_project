@@ -71,7 +71,7 @@ def model_inference_one_vac(model, vac_vocab, res_vocab, vac_text, city, device)
     model.to(device)
     model.eval()
     with torch.no_grad():
-        for res_text in tqdm(cluster):
+        for res_text in tqdm(np.unique(cluster)):
             if res_text:
                 res_idx = make_indexes_from_tuple(tuple([res_text]), res_vocab).to(device)
                 similarity = model(vac_idx, res_idx).item()
