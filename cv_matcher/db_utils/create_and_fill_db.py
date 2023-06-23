@@ -20,6 +20,9 @@ def create_connection(db_path):
 
 
 def write_df_to_sql(df_path, cols_to_insert, table_name, cnx):
+    """
+        create database base on df 
+    """
     df = pd.read_parquet(df_path)
     if len(cols_to_insert) > 0:
         df = df[cols_to_insert]

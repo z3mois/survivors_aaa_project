@@ -7,6 +7,9 @@ from constants import MODEL_PARAMETERS
 
 
 class SiameseCVNet(nn.Module):
+    """
+        model architecture
+    """
     def __init__(self, vac_vocab_size, res_vocab_size,
                  embedding_dim, rnn_hidden_dim, rnn_type, dropout, bidir,
                  hidden_layers, fc1_output=512, fc2_output=128):
@@ -123,6 +126,9 @@ class SiameseCVNet(nn.Module):
 
 
 def create_model():
+    """
+        create model from params
+    """
     model = SiameseCVNet(
         embedding_dim=MODEL_PARAMETERS["embedding_dim"],
         vac_vocab_size=MODEL_PARAMETERS["vac_vocab_size"],

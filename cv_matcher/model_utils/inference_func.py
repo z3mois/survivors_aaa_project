@@ -16,8 +16,8 @@ from model import create_model
 
 def load_vocabs():
     '''
-    Очень тупая функция, но я устал
-    :return:
+        load vocab for pickle
+    :return: vocab_vacancy, resume_vocab
     '''
     with open('data/res_vocab.pickle', 'rb') as f:
         res_vocab = pickle.load(f)

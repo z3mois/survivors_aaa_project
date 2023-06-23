@@ -13,6 +13,9 @@ def get_top_resumes(similarity_scores):
     # Replace this with your database query code
     return [f'{resume}' for resume, _ in similarity_scores]
 def get_number(size):
+    """
+        create fake_number
+    """
     faker = Faker('ru_RU')
     phone_numbers = []
     i = 0
